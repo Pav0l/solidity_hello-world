@@ -42,14 +42,14 @@ truffle compile
 ```
 or just `compile` if you're still running `truffle develop` command.
 
-Once your contract is compiled, you need to migrate it to Ganache network. [Migrations](https://truffleframework.com/docs/truffle/getting-started/running-migrations) are JavaScript files that help you deploy contracts to the Ethereum network. Once you setup your migration file, run `migrate` command in your console. [My migration file](migrations\2_contract_migration.js) is pretty simple.
+Once your contract is compiled, you need to migrate it to Ganache network. [Migrations](https://truffleframework.com/docs/truffle/getting-started/running-migrations) are JavaScript files that help you deploy contracts to the Ethereum network. Once you setup your migration file, run `migrate` command in your console. [My migration file](migrations/2_contract_migration.js) is pretty simple.
 
 If everything was set up correctly, your contract should be deployed on Ganache network, which you can see in your Ganache GUI.
 
 
 ## Interacting with your smart contract
 
-[My HelloWorld contract](contracts\HelloWorld.sol) has two functions exposed - `getMessage()` and `setMessage()`. The latter takes a string argument and sets it as new message.
+[My HelloWorld contract](contracts/HelloWorld.sol) has two functions exposed - `getMessage()` and `setMessage()`. The latter takes a string argument and sets it as new message.
 
 To interact with deployed smart contract, start your Truffle development CLI with
 ```
