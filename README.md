@@ -1,4 +1,4 @@
-# Solidity Demo Project
+# Solidity HelloWorld Demo Project
 
 Personal project to test out [Solidity](https://solidity.readthedocs.io).
 
@@ -22,7 +22,7 @@ To create an empty project setup without any existing smart contracts, use
 truffle init
 ```
 
-To create new contracts, create a new `*.sol` file inside the `contracts/` folder.
+To create new contract, create a new `*.sol` file inside the `contracts/` folder. And now you can start writing your smart contract.
 
 ## Project deployment
 
@@ -42,6 +42,48 @@ truffle compile
 ```
 or just `compile` if you're still running `truffle develop` command.
 
-Once your contract is compiled, you need to migrate it to Ganache network. [Migrations](https://truffleframework.com/docs/truffle/getting-started/running-migrations) are JavaScript files that help you deploy contracts to the Ethereum network. Once you setup your migration file, run `migrate` command in your console. 
+Once your contract is compiled, you need to migrate it to Ganache network. [Migrations](https://truffleframework.com/docs/truffle/getting-started/running-migrations) are JavaScript files that help you deploy contracts to the Ethereum network. Once you setup your migration file, run `migrate` command in your console. [My migration file](migrations\2_contract_migration.js) is pretty simple.
 
 If everything was set up correctly, your contract should be deployed on Ganache network, which you can see in your Ganache GUI.
+
+
+## Interacting with your smart contract
+
+[My HelloWorld contract](contracts\HelloWorld.sol) has two functions exposed - `getMessage()` and `setMessage()`. The latter takes a string argument and sets it as new message.
+
+To interact with deployed smart contract, start your Truffle development CLI with
+```
+truffle develop
+```
+
+Truffle provides a Javascript object with lots of information about the contract.
+```
+let contractInstance = await HelloWorld.deployed()
+```
+
+Notice the `await`, as this is async operation that is not processed immediately.
+
+Now when you run `contractInstance` you'll see your contract functions among other things.
+
+To get the message, run:
+```
+let myMessage = await contractInstance.getMessage()
+// undefined
+myMessage  //'Hello World'
+```
+
+To set a new message, run:
+```
+let setNewMessage = await contractInstance.setMessage('My first contract, WOHOO!')
+// undefined
+setNewMessage  //returns transaction information and receipt
+```
+
+To get the new message, call `getMessage()` again.
+```
+let myNewMessage = await contractInstance.getMessage()
+// undefined
+myNewMessage  //'My first contract, WOHOO!'
+```
+
+Inside your Ganache GUI, you can see more information about each transaction, gas usage, block information, addresses used, etc.
